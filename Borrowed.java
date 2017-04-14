@@ -2,7 +2,7 @@ import java.sql.Date;
 
 
 public class Borrowed {
-	private int Borrow_ID, Member_ID;
+	private int Borrow_ID;
 	private String Borrow_Status ;
 	private Date Date_Issued, Date_Returned, Return_Date ;
 	
@@ -12,7 +12,6 @@ public class Borrowed {
 		this.Return_Date=Return_Date;
 		this.Date_Returned=Date_Returned;
 		this.Borrow_ID=Borrow_ID;
-		this.Member_ID=Member_ID;
 		this.Borrow_Status=Borrow_Status;
 	}
 	Date getDate_Issued()
