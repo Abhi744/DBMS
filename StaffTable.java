@@ -7,13 +7,13 @@ public class StaffTable extends AbstractTableModel {
 	private static final int ContactCol = 3;
 	private static final int WorkingHoursCol = 2;
 	private static final int StaffNameCol = 1;
-//	private static final int AddressCol = 2;
-//	private static final int EmailCol = 3;
+	private static final int AddressCol = 4;
+	private static final int EmailCol = 5;
 //	private static final int ContactCol = 4;
 //	private static final int WorkingHoursCol = 5;
 //	private static final int BookGenreAssignedCol = 6;
 //	
-	private String[] ColumnNames = {"Staff ID","Staff Name", "Working Hours","Contact"};
+	private String[] ColumnNames = {"Staff ID","Staff Name", "Working Hours","Contact","Address","Email"};
 //	private String[] ColumnNames = {"Staff ID","Staff Name","Address","Email","Contact", "Working Hours", "Book Genre Assigned"};
 	
 	private List<Staff> staff;
@@ -43,14 +43,14 @@ public class StaffTable extends AbstractTableModel {
 			return tempEmployee.getStaff_ID();
 		case StaffNameCol:
 			return tempEmployee.getStaff_Name();
-//		case AddressCol:
-//			return tempEmployee.getAddress();
+		case AddressCol:
+			return tempEmployee.getAddress();
 		case WorkingHoursCol:
 			return tempEmployee.getWorking_Hours();
 		case ContactCol:
 			return tempEmployee.getContact();
-//		case EmailCol:
-//			return tempEmployee.getEmail();
+		case EmailCol:
+			return tempEmployee.getEmail();
 		
 //		case BookGenreAssignedCol:
 //			return tempEmployee.getBook_Genre_Assigned();
