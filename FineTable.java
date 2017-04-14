@@ -6,10 +6,8 @@ public class FineTable extends AbstractTableModel {
 	private static final int BorrowIDCol = 0;
 	private static final int FineRateCol = 1;
 	private static final int FineAmountCol = 2;
-	private static final int DateIssuedCol = 3;
-	private static final int ReturnDateCol = 4;
 	
-	private String[] ColumnNames = {"Borrow ID","Fine Rate","Fine Amount","Date Issued","Return Date"};
+	private String[] ColumnNames = {"Borrow ID","Fine Rate","Fine Amount"};
 	
 	private List<Fine> fine;
 	
@@ -40,10 +38,6 @@ public class FineTable extends AbstractTableModel {
 			return tempEmployee.getFine_Rate();
 		case FineAmountCol:
 			return tempEmployee.getFine_Amount();
-		case DateIssuedCol:
-			return tempEmployee.getDate_Issued();
-		case ReturnDateCol:
-			return tempEmployee.getReturn_Date();
 		default:
 			return tempEmployee.getBorrow_ID();
 		}
