@@ -409,6 +409,33 @@ public class LibraryManagementSystemDAO {
 			
 
 	}
+	
+
+	public void updateMembers(Members theMembers) throws SQLException {
+		PreparedStatement myStmt = null;
+
+		try {
+			// prepare statement
+			myStmt = myConn.prepareStatement("update members"
+					+ " set name=?, status=?, email=?, contact=?, address=?"
+					+ " where id=?");
+			
+			// set params
+			myStmt.setString(1, theMembers.getMember_Name());
+			myStmt.setString(2, theMembers.getMember_Status());
+			myStmt.setString(3, theMembers.getEmail());
+			myStmt.setString(4, theMembers.getContact());
+			myStmt.setString(5, theMembers.getAddress());
+			
+			// execute SQL
+			myStmt.executeUpdate();			
+		}
+		finally {
+			close(myStmt);
+		}
+		
+	}
+	
 	public void AddStaff(String userinput,String em,String Cont,String add,int wh) throws SQLException
 	{
 		

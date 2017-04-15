@@ -79,7 +79,7 @@ public class Members {
 	}
 	@Override
 	public String toString() {
-		return String.format("Member [Member_ID=%d, Member_Name=%s, Address=%s, Email=%s, Contact=%s]",
+		return String.format("Members [Member_ID=%d, Member_Name=%s, Address=%s, Email=%s, Contact=%s]",
 				Member_ID, Member_Name, Address, Email, Contact);
 	}
 	
