@@ -105,6 +105,43 @@ public class All_Books extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.SOUTH);
+		
+		JButton btnAddBook = new JButton("Add Book");
+		btnAddBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// create dialog
+				AddBookDialog dialog = new AddBookDialog(All_Books.this, lmsDAO);
+
+				// show dialog
+				dialog.setVisible(true);
+			}
+		});
+		panel_1.add(btnAddBook);
+		
+		JButton btnDeleteBook = new JButton("Delete Book");
+		panel_1.add(btnDeleteBook);
+		
+		JButton btnUpdateBook = new JButton("Update Book");
+		panel_1.add(btnUpdateBook);
 	}
 
-}
+	public void refreshBooksView() {
+
+		try {
+			List<Books> employees = lmsDAO.getAllBooks();
+
+			// create the model and update the "table"
+			BookTable model = new BookTable(employees);
+
+			table.setModel(model);
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	}
+
+

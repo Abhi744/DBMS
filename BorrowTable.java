@@ -3,15 +3,15 @@ import javax.swing.table.*;
 
 public class BorrowTable extends AbstractTableModel {
 	
-	//private static final int BookCodeCol = 0;
-	private static final int BorrowIDCol = 0;
-	//private static final int MemberIDCol = 2;
-	private static final int BorrowStatusCol = 1;
-	private static final int DateIssuedCol = 2;
-	private static final int DateReturnedCol = 3;
-	private static final int ReturnDateCol = 4;
+	private static final int BookCodeCol = 0;
+	private static final int BorrowIDCol = 1;
+	private static final int MemberIDCol = 2;
+	private static final int BorrowStatusCol = 3;
+	private static final int DateIssuedCol = 4;
+	private static final int DateReturnedCol = 5;
+	private static final int ReturnDateCol = 6;
 	
-	private String[] ColumnNames = {"Borrow ID","Borrow Status","Date Issued","Date Returned","Return Date"};
+	private String[] ColumnNames = {"Book Code","Borrow ID","Member ID","Borrow Status","Date Issued","Date Returned","Return Date"};
 	
 	private List<Borrowed> borrowed;
 	
@@ -36,8 +36,12 @@ public class BorrowTable extends AbstractTableModel {
 		Borrowed tempEmployee = borrowed.get(row);
 
 		switch (col) {
+		case BookCodeCol:
+			return tempEmployee.getBook_Code();
 		case BorrowIDCol:
 			return tempEmployee.getBorrow_ID();
+		case MemberIDCol:
+			return tempEmployee.getMember_ID();
 		case BorrowStatusCol:
 			return tempEmployee.getBorrow_Status();
 		case DateIssuedCol:
@@ -47,7 +51,7 @@ public class BorrowTable extends AbstractTableModel {
 		case ReturnDateCol:
 			return tempEmployee.getReturn_Date();
 		default:
-			return tempEmployee.getBorrow_ID();
+			return tempEmployee.getBook_Code();
 		}
 	}
 

@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 
-public class All_Staff extends JFrame {
+public class All_Members extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -26,17 +26,29 @@ public class All_Staff extends JFrame {
 	 * Launch the application.
 	 */
 	private LibraryManagementSystemDAO lmsDAO;
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					All_Members frame = new All_Members();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public All_Staff() {
+	public All_Members() {
 		try {
 			lmsDAO = new LibraryManagementSystemDAO();
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE); 
 		}
-		setTitle("Staff");
+		setTitle("Members");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -49,8 +61,8 @@ public class All_Staff extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblEnterBookTitle = new JLabel("Enter Staff Name");
-		panel.add(lblEnterBookTitle);
+		JLabel lblEnterMemberTitle = new JLabel("Enter Member Name");
+		panel.add(lblEnterMemberTitle);
 		
 		textField = new JTextField();
 		panel.add(textField);
@@ -61,28 +73,28 @@ public class All_Staff extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try{
-					String Staff_Name = textField.getText();
-					List<Staff> staff = null;
+					String Member_Name = textField.getText();
+					List<Members> members = null;
 					
-					if(Staff_Name !=null && Staff_Name.trim().length()>0)
+					if(Member_Name !=null && Member_Name.trim().length()>0)
 					{
-						staff = lmsDAO.searchStaff(Staff_Name);
+						members = lmsDAO.searchMembers(Member_Name);
 					}
 					else
 					{
-						staff = lmsDAO.getAllStaff();
+						members = lmsDAO.getAllMembers();
 					}
-					StaffTable model = new StaffTable(staff);
+					MemberTable model= new MemberTable(members);
 					
 					table.setModel(model);
 					
-//					for(Books temp : books)
+//					for(Members temp : books)
 //					{
 //						System.out.println(temp);
 //					}
 				}catch(Exception exc)
 				{
-					JOptionPane.showMessageDialog(All_Staff.this,"Error:"+exc,"Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(All_Members. this,"Error:"+exc,"Error",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -93,8 +105,43 @@ public class All_Staff extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.SOUTH);
+		
+		JButton btnAddMember = new JButton("Add Member");
+		btnAddMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// create dialog
+				AddMemberDialog dialog = new AddMemberDialog(All_Members.this, lmsDAO);
+
+				// show dialog
+				dialog.setVisible(true);
+			}
+		});
+		panel_1.add(btnAddMember);
+		
+		JButton btnDeleteMember = new JButton("Delete Member");
+		panel_1.add(btnDeleteMember);
+		
+		JButton btnUpdateMember = new JButton("Update Member");
+		panel_1.add(btnUpdateMember);
 	}
 
-}
+	public void refreshMembersView() {
+
+		try {
+			List<Members> employees = lmsDAO.getAllMembers();
+
+			// create the model and update the "table"
+			MemberTable model = new MemberTable(employees);
+
+			table.setModel(model);
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	}
 
 
